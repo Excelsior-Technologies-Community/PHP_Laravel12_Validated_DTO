@@ -1,59 +1,566 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PHP_Laravel12_Validated_DTO
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Description
 
-## About Laravel
+PHP_Laravel12_Validated_DTO is a Laravel 12 REST API project that demonstrates how to implement Data Transfer Object (DTO) pattern using the wendelladriel/laravel-validated-dto package.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The project follows a clean architecture approach by separating responsibilities into Controller, DTO, Service, and Model layers. Incoming request data is first validated using a DTO class, then passed to the Service layer for business logic, and finally stored in the database using Eloquent Model.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This project is designed as a reference architecture for building scalable and maintainable APIs in Laravel 12.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Project Purpose
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Demonstrate DTO-based validation in Laravel 12
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Implement Service Layer architecture
 
-## Laravel Sponsors
+- Maintain clean separation of concerns
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Improve code readability and maintainability
 
-### Premium Partners
+- Provide a structured API development example
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Key Features
 
-## Code of Conduct
+- Laravel 12 based REST API
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- ValidatedDTO package integration
 
-## Security Vulnerabilities
+- Service Layer implementation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Structured folder organization
 
-## License
+- JSON API response format
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- MySQL database integration
+
+
+## Architecture Flow
+
+Client Request → Route → Controller → DTO → Service → Model → Database → JSON Response
+
+
+## Prerequisites
+
+- PHP >= 8.2
+- Composer
+- MySQL
+- Laravel 12
+- Postman (for API testing)
+
+
+---
+
+
+
+## Installation Steps
+
+
+---
+
+
+## STEP 1: Create Laravel 12 Project
+
+### Open terminal / CMD and run:
+
+```
+composer create-project laravel/laravel PHP_Laravel12_Validated_DTO "12.*"
+
+```
+
+### Go inside project:
+
+```
+cd PHP_Laravel12_Validated_DTO
+
+```
+
+#### Explanation:
+
+Creates a fresh Laravel 12 application with all default folders, configuration, and dependencies. 
+
+This is the base structure for building your API project.
+
+
+
+
+## STEP 2: Database Setup 
+
+### Open .env and set:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel12_validated_dto
+DB_USERNAME=root
+DB_PASSWORD=
+
+```
+
+### Create database in MySQL / phpMyAdmin:
+
+```
+Database name: laravel12_validated_dto
+
+```
+
+#### Explanation:
+
+Configures Laravel to connect with MySQL database using .env file credentials. 
+
+This allows Laravel to store and retrieve data from the database.
+
+
+
+
+## STEP 3: Install Validated DTO Package
+
+### Run:
+
+```
+composer require wendelladriel/laravel-validated-dto
+
+```
+
+#### Explanation:
+
+Installs the DTO validation package which helps validate and transfer data safely between Controller and Service layers. 
+
+It improves clean architecture and data validation.
+
+
+
+
+
+## STEP 4: Project Structure 
+
+### Create folders:
+
+```
+mkdir app\DTOs
+
+mkdir app\Services
+
+```
+
+#### Explanation:
+
+Creates custom folders (DTOs, Services) to organize business logic and data transfer objects. 
+
+This follows a clean architecture pattern.
+
+
+
+
+
+
+## STEP 5: Create Model + Migration
+
+### Run:
+
+```
+php artisan make:model Post -m
+
+```
+
+### Edit Migration: database/migrations/create_posts_table.php
+
+```
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('posts', function (Blueprint $table) {
+
+            $table->id();
+
+            $table->string('title');
+
+            $table->string('content');
+
+            $table->integer('price');
+
+            $table->timestamps();
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('posts');
+    }
+};
+
+```
+
+### Run migration:
+
+```
+php artisan migrate
+
+```
+
+#### Explanation:
+
+Creates the Post model and migration file to define database table structure. 
+
+Migration is used to create the posts table with required fields.
+
+
+
+
+
+
+## STEP 6: Create DTO 
+
+### Open: app/DTOs/PostDTO.php
+
+```
+<?php
+
+namespace App\DTOs;
+
+use WendellAdriel\ValidatedDTO\ValidatedDTO;
+
+class PostDTO extends ValidatedDTO
+{
+    public string $title;
+    public string $content;
+    public int $price;
+
+    protected function rules(): array
+    {
+        return [
+            'title' => ['required', 'string'],
+            'content' => ['required', 'string'],
+            'price' => ['required', 'integer'],
+        ];
+    }
+
+    protected function defaults(): array
+    {
+        return [];
+    }
+
+    protected function casts(): array
+    {
+        return [];
+    }
+}
+
+```
+
+#### Explanation:
+
+Defines PostDTO class to validate incoming request data before processing. 
+
+It ensures only valid and correct data is used in the application.
+
+
+
+
+
+
+## STEP 7: Create Service Layer (Reference Architecture)
+
+### Create: app/Services/PostService.php
+
+```
+<?php
+
+namespace App\Services;
+
+use App\Models\Post;
+use App\DTOs\PostDTO;
+
+class PostService
+{
+    public function create(PostDTO $dto): Post
+    {
+        return Post::create([
+            'title' => $dto->title,
+            'content' => $dto->content,
+            'price' => $dto->price,
+        ]);
+    }
+}
+
+```
+
+#### Explanation:
+
+Creates PostService class to handle business logic and database operations. 
+
+This keeps Controller clean and separates logic properly.
+
+
+
+
+## STEP 8: Edit Model
+
+### Edit: app/Models/Post.php
+
+```
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    protected $fillable = [
+        'title',
+        'content',
+        'price'
+    ];
+}
+
+```
+
+#### Explanation:
+
+Defines fillable fields in Post model to allow mass assignment. 
+
+This enables Laravel to safely insert data into the database.
+
+
+
+
+
+
+## STEP 9: Create Controller
+
+### Run: 
+
+```
+php artisan make:controller PostController
+
+```
+
+### Open: app/Http/Controllers/PostController.php
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Services\PostService;
+use App\DTOs\PostDTO;
+
+class PostController extends Controller
+{
+    public function index()
+    {
+        return response()->json([
+            'status' => true,
+            'message' => 'Post API Working'
+        ]);
+    }
+
+    public function store(Request $request, PostService $service)
+    {
+        try {
+
+            $dto = PostDTO::fromArray($request->all());
+
+            $post = $service->create($dto);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Post Created Successfully',
+                'data' => $post
+            ], 201);
+
+        } catch (\Throwable $e) {
+
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+                'line' => $e->getLine()
+            ], 500);
+
+        }
+    }
+}
+
+```
+
+#### Explanation:
+
+Handles incoming API requests and converts request data into DTO object. 
+
+It then sends DTO to Service layer and returns JSON response.
+
+
+
+
+
+
+## STEP 10: Add Route
+
+### routes/api.php
+
+```
+<?php
+
+use App\Http\Controllers\PostController;
+
+Route::get('/posts', [PostController::class, 'index']);
+Route::post('/posts', [PostController::class, 'store']);
+
+```
+
+#### Explanation:
+
+Defines API endpoints for accessing PostController methods. 
+
+Routes connect HTTP requests to controller functions.
+
+
+
+
+
+
+## STEP 11: Test Server
+
+### Run the server:
+
+```
+php artisan serve
+
+```
+
+### Visit:
+
+```
+http://127.0.0.1:8000
+
+```
+
+#### Explanation:
+
+Starts Laravel development server to run the project locally. 
+
+This allows you to access API via browser or Postman.
+
+
+
+
+
+
+## STEP 12: Test Using Postman 
+
+### Method:
+
+```
+POST 
+
+```
+
+### URL:
+
+```
+http://127.0.0.1:8000/api/posts
+
+```
+
+### Headers:
+
+```
+Content-Type: application/json
+
+```
+
+### Body (JSON):
+
+```
+{
+  "title": "Laptop",
+  "content": "Gaming laptop",
+  "price": 50000
+}
+
+```
+
+### Example Response:
+
+```
+{
+    "status": true,
+    "message": "Post Created Successfully",
+    "data": {
+        "title": "Laptop",
+        "content": "Gaming laptop",
+        "price": 50000,
+        "updated_at": "2026-02-26T08:34:08.000000Z",
+        "created_at": "2026-02-26T08:34:08.000000Z",
+        "id": 1
+    }
+}
+
+```
+
+
+#### Explanation:
+
+Sends POST request with JSON data to test API functionality. 
+
+This verifies DTO validation, service logic, and database insertion.
+
+
+## Expected Output:
+
+
+<img width="1409" height="904" alt="Screenshot 2026-02-26 140446" src="https://github.com/user-attachments/assets/3d597f40-5cc3-4f25-8c7c-fb3a2addaa3f" />
+
+
+
+---
+
+# Project Folder Structure:
+
+```
+PHP_Laravel12_Validated_DTO/
+│
+├── app/
+│   ├── DTOs/
+│   │   └── PostDTO.php
+│   │
+│   ├── Services/
+│   │   └── PostService.php
+│   │
+│   ├── Http/
+│   │   └── Controllers/
+│   │       └── PostController.php
+│   │
+│   └── Models/
+│       └── Post.php
+│
+├── database/
+│   └── migrations/
+│       └── create_posts_table.php
+│
+├── routes/
+│   └── api.php
+│
+├── .env
+├── artisan
+└── composer.json
+```
