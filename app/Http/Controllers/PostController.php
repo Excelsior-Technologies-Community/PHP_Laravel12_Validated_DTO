@@ -29,7 +29,6 @@ class PostController extends Controller
                 'message' => 'Post Created Successfully',
                 'data' => $post
             ], 201);
-
         } catch (\Throwable $e) {
 
             return response()->json([
@@ -37,7 +36,30 @@ class PostController extends Controller
                 'message' => $e->getMessage(),
                 'line' => $e->getLine()
             ], 500);
-
         }
+    }
+
+    public function list(PostService $service)
+    {
+        return response()->json([
+            'status' => true,
+            'data' => $service->all()
+        ]);
+    }
+
+    public function search(Request $request, PostService $service)
+    {
+        return response()->json([
+            'status' => true,
+            'data' => $service->search($request->query('q'))
+        ]);
+    }
+
+    public function paginated(PostService $service)
+    {
+        return response()->json([
+            'status' => true,
+            'data' => $service->paginated(3)
+        ]);
     }
 }
