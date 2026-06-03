@@ -4,35 +4,34 @@ namespace App\Services;
 
 use App\Models\Post;
 use App\DTOs\PostDTO;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class PostService
 {
     public function create(PostDTO $dto): Post
     {
         return Post::create([
-            'title' => $dto->title,
-            'content' => $dto->content,
-            'price' => $dto->price,
+            'title'  => $dto->title,
+            'body'   => $dto->body,
+            'status' => $dto->status,
         ]);
     }
 
-    // FEATURE: Get all posts
-    public function all()
+    public function all(): Collection
     {
         return Post::all();
     }
 
-    // FEATURE: Search posts
-    public function search(string $query)
+    public function search(string $query): Collection
     {
         return Post::where('title', 'like', "%$query%")
-            ->orWhere('content', 'like', "%$query%")
+            ->orWhere('body', 'like', "%$query%")
             ->get();
     }
 
-    // FEATURE: Pagination
-    public function paginated(int $limit = 3)
+    public function paginated(int $limit = 5): LengthAwarePaginator
     {
-        return Post::paginate($limit);
+        return Post::latest()->paginate($limit);
     }
 }
